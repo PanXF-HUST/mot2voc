@@ -66,7 +66,7 @@ def gennerate_gt(gt,Annotation,frame,filename,width,height):
 
 
     with codecs.open(Annotation + filename + '.xml', 'w') as xml:
-        xml.write('<xml version="1.0" encoding="UTF-8">\n')
+        xml.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         xml.write('<annotation>\n')
         xml.write('\t<folder>' + 'voc' + '</folder>\n')
         xml.write('\t<filename>' + filename + '.jpg' + '</filename>\n')
@@ -193,8 +193,8 @@ def main():
             fp_txt.writelines(format_name[:-4] + '\n')  # 将生成的新的文件名写入train_all.txt，用于后续数据集拆分
             shutil.copy(img1 + img, JPEGImages + '/' + format_name)  # 将文件移动到指定文件夹并重新命名
             frame = int(img[:-4])
-            # gennerate_gt(gt, Annotation=Annotations, frame=frame, filename=format_name[:-4], width=imWidth,
-            #              height=imHeight)   #生成标注文件
+            gennerate_gt(gt, Annotation=Annotations, frame=frame, filename=format_name[:-4], width=imWidth,
+                      height=imHeight)   #生成标注文件
         bar.finish()
     fp_txt.close()
     
